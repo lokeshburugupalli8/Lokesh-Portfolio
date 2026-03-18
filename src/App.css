@@ -1,38 +1,413 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app-shell {
+  position: relative;
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.app-shell::before,
+.app-shell::after {
+  content: "";
+  position: fixed;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  filter: blur(24px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-shell::before {
+  top: -8rem;
+  right: -6rem;
+  background: radial-gradient(circle, rgba(255, 155, 87, 0.42), transparent 70%);
+}
+
+.app-shell::after {
+  bottom: -10rem;
+  left: -8rem;
+  background: radial-gradient(circle, rgba(0, 196, 167, 0.4), transparent 68%);
+}
+
+.site-header,
+.section {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(1120px, calc(100% - 2rem));
+  margin: 1.2rem auto 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(10, 13, 20, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  color: #f4efe6;
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-nav a {
+  color: #b9c3d7;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: #ffffff;
+}
+
+.section {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 5rem 0;
+  scroll-margin-top: 6rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 2rem;
+  align-items: stretch;
+  padding-top: 5rem;
+}
+
+.hero-copy,
+.hero-panel,
+.about-card,
+.project-card,
+.contact-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(20, 24, 34, 0.92), rgba(11, 15, 24, 0.88));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+.hero-copy {
+  padding: clamp(2rem, 4vw, 4rem);
+  border-radius: 2rem;
+}
+
+.hero-panel {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: #72e1c7;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.section-heading h2,
+.hero-panel h2,
+.contact-card-featured h3,
+.project-card h3 {
+  margin: 0;
+  color: #f7f3ec;
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+.hero h1 {
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 9vw, 6.2rem);
+  line-height: 0.94;
+}
+
+.hero-role {
+  margin: 1rem 0 0;
+  color: #d7deee;
+  font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+}
+
+.hero-text,
+.about-card p,
+.project-card p,
+.contact-card p,
+.hero-panel span {
+  color: #b9c3d7;
+  line-height: 1.75;
+}
+
+.hero-text {
+  max-width: 58ch;
+  margin: 1.4rem 0 0;
+  font-size: 1.02rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 3rem;
+  padding: 0.85rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 
-.App-link {
-  color: #61dafb;
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.button-primary {
+  color: #081018;
+  background: linear-gradient(135deg, #72e1c7, #8cc8ff);
+}
+
+.button-secondary {
+  color: #f6f8fc;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.6rem;
+}
+
+.hero-meta span {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  color: #d7deee;
+  font-size: 0.92rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.panel-label,
+.card-title,
+.project-category,
+.project-index {
+  margin: 0;
+  color: #8cc8ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-panel-top h2 {
+  margin-top: 0.75rem;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.15;
+}
+
+.hero-highlights {
+  display: grid;
+  gap: 1rem;
+}
+
+.stat-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.15rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.stat-card strong {
+  color: #f7f3ec;
+  font-size: 2rem;
+  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+.section-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.section-heading {
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.04;
+}
+
+.about-layout,
+.contact-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.about-card,
+.contact-card-featured {
+  padding: 1.6rem;
+  border-radius: 1.6rem;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.pill {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  color: #d7deee;
+  font-size: 0.92rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.6rem;
+  border-radius: 1.6rem;
+  transition: transform 220ms ease, border-color 220ms ease;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(140, 200, 255, 0.26);
+}
+
+.project-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-card h3 {
+  font-size: 1.75rem;
+}
+
+.contact-section {
+  padding-bottom: 6rem;
+}
+
+.contact-links {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.35rem;
+  border-radius: 1.35rem;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.contact-card strong {
+  color: #f7f3ec;
+  font-size: 1.05rem;
+}
+
+.contact-card:hover,
+.contact-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(114, 225, 199, 0.24);
+}
+
+.contact-card-featured {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  background:
+    radial-gradient(circle at top right, rgba(114, 225, 199, 0.14), transparent 36%),
+    linear-gradient(180deg, rgba(20, 24, 34, 0.96), rgba(11, 15, 24, 0.9));
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .about-layout,
+  .contact-layout,
+  .project-grid {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+
+  .site-header {
+    padding: 1rem;
+    border-radius: 1.5rem;
+  }
+
+  .hero {
+    padding-top: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .about-card,
+  .project-card,
+  .contact-card,
+  .contact-card-featured {
+    border-radius: 1.35rem;
+  }
+
+  .hero h1 {
+    max-width: none;
   }
 }
