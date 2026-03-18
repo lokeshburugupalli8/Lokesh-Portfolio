@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lokeshburugupalli8.github.io/Lokesh-Portfolio",
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
